@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const ExpenseItem = (props) => {
   const [title, setTitle] = useState(props.title);
   const clickHandler = () => {
-    setTitle("Updated!");
+    axios.get("https://swapi.dev/api/people/1").then((response) => {
+      console.log(response);
+      if (response.status === 200) {
+        setTitle(response.data.name);
+      }
+    });
   };
   return (
     <div>
